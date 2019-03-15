@@ -21,6 +21,8 @@ import {MemberListDialogComponent} from './dialog/member-list-dialog/member-list
 import {MessageDialogComponent} from './dialog/message-dialog/message-dialog.component';
 import {SuccessOrErrorHandlerService} from './shared/service/success-or-error-handler.service';
 import {LoginComponent} from './main/login/login.component';
+import {AuthService} from './shared/service/authetication.service';
+import {ErrorInterceptor} from './shared/interceptors/error.interceptor';
 
 registerLocaleData(localeRo, 'ro-MD');
 
@@ -28,6 +30,11 @@ const interceptors = [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: ServerUrlInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
     multi: true
   }
 ];
@@ -55,7 +62,7 @@ const interceptors = [
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [SuccessOrErrorHandlerService,interceptors,{provide: LOCALE_ID, useValue: 'ro-MD'}],
+  providers: [AuthService,SuccessOrErrorHandlerService,interceptors,{provide: LOCALE_ID, useValue: 'ro-MD'}],
   bootstrap: [AppComponent],
   entryComponents: [NewMemberDialogComponent,NewBookDialogComponent,BookHistoryDialogComponent,MemberListDialogComponent]
 })

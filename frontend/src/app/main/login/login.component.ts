@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../shared/service/authetication.service';
 
 @Component({
   selector: 'app-login',
@@ -10,53 +11,66 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
+  lForm: FormGroup;
+  error: string;
+  subscriptions: Subscription[];
+  redirectUrl: string = undefined;
+  formSubmitted = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    //private authenticationService: AuthenticationService,
-    //private alertService: AlertService
-  ) {}
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private authenticationService: AuthService) {
+    this.lForm = fb.group({
+      'username': [null,Validators.required],
+      'password': [null,Validators.required],
+    });
+  }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
-    });
-
-    // reset login status
-    //this.authenticationService.logout();
+    this.subscriptions = [];
+    this.authenticationService.logout();
+    this.subscriptions.push(this.route.queryParams.subscribe(params => {
+      this.redirectUrl = params['returnUrl'];
+    }));
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  login() {
+    this.formSubmitted = true;
 
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
+    if(this.lForm.invalid)
+    {
+        return;
     }
 
-    // this.loading = true;
-    // this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.router.navigate([this.returnUrl]);
-    //     },
-    //     error => {
-    //       this.alertService.error(error);
-    //       this.loading = false;
-    //     });
+    this.formSubmitted = false;
 
-    this.router.navigate(['/dashboard']);
+    this.subscriptions.push(this.authenticationService.login(this.lForm.get('username').value, this.lForm.get('password').value)
+      .subscribe(
+        data => {
+          const bearerToken = data.headers.get('Authorization');
+          if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+            const jwt = bearerToken.slice(7, bearerToken.length);
+            localStorage.setItem('authenticationToken', JSON.stringify(jwt));
+          }
+          if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
+        },
+        error => {
+          this.error = error;
+        }));
   }
 
+
+  logout() {
+    this.subscriptions.push(this.authenticationService.logout().subscribe());
+    this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 }

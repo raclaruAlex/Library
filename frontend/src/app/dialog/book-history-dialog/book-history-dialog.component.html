@@ -1,0 +1,37 @@
+<div class="gradient-card-header bg-sidebar border-gradient">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="card-header-title white-text">Detalii inchiriere</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card content -->
+<div class="card-body card-body-cascade">
+  <table class="table table-widths text-center">
+    <thead class="bg-sidebar white-text">
+    <tr>
+      <th scope="col">Nr.</th>
+      <th scope="col">Nume</th>
+      <th scope="col">Prenume</th>
+      <th scope="col">Adresa</th>
+      <th scope="col">Numar de telefon</th>
+      <th scope="col">Email</th>
+      <th scope="col">Data inchiriere</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let hist of history;let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ hist.member.lastname }}</td>
+      <td>{{ hist.member.firstname }}</td>
+      <td>{{ hist.member.address }}</td>
+      <td>{{ hist.member.phoneNumber }}</td>
+      <td>{{ hist.member.email }}</td>
+      <td>{{ hist.rentalDate | date: 'dd/MM/yyyy HH:mm:ss'  }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

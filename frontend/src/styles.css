@@ -1,0 +1,494 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+body {
+  background : #F5F5F5;
+}
+
+.md-form label {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.md-form-modified .mat-form-field-infix {
+  padding : 0.61em 0 !important;
+}
+
+.mat-form-field-wrapper,
+.ng-select {
+  margin-bottom: -20px;
+}
+
+.md-form .form-control {
+  margin: 0 auto;
+}
+
+.mat-tab-body-content {
+  overflow : hidden !important;
+}
+
+ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding-top    : 10px !important;
+  padding-bottom : 10px !important;
+  line-height    : 1.2em !important;
+}
+
+ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option-marked {
+  background : #3F51B5 !important;
+  color      : #FFFFFF !important;
+}
+
+ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover {
+  background : #3F51B5 !important;
+  color      : #FFFFFF !important;
+}
+
+ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover .ng-select-muted {
+  color : #CDC3FF !important;
+}
+
+ng-select.ng-invalid.ng-touched .ng-select-container:after {
+  content       : '';
+  border-bottom : 2px solid #F44336;
+  width         : 100%;
+  bottom        : 0;
+  position      : absolute;
+  transition    : border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+}
+
+ng-select.ng-valid.ng-touched .ng-select-container:after {
+  content       : '';
+  border-bottom : 2px solid #00C851;
+  width         : 100%;
+  bottom        : 0;
+  position      : absolute;
+  transition    : border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+}
+
+.inputVal {
+  display : none;
+}
+
+
+.darkskie {
+  background : #FFFFFF;
+  position   : fixed;
+  width      : 100%;
+  z-index    : 999;
+  top        : 0;
+  left       : 0;
+}
+
+.mt-4s {
+  padding-top : 40px;
+}
+
+
+.md-forms {
+  position      : relative;
+  margin-top    : 1.5rem;
+  margin-bottom : 1.5rem;
+}
+
+.margin-body {
+  margin-top : 80px;
+}
+
+footer {
+  margin-top    : 30px;
+  margin-bottom : 10px;
+  background    : #FFFFFF;
+  padding       : 15px 30px;
+  border-radius : 5px;
+}
+
+.table-width-container {
+  width      : 100%;
+  overflow-x : scroll;
+}
+
+.table-size {
+  width : 3400px;
+}
+
+
+.mat-radio-container {
+  cursor : pointer;
+}
+
+.sky {
+  margin-top    : 30px;
+  background    : #FFFFFF;
+  padding       : 15px 30px;
+  border-radius : 5px;
+  height        : 91vh;
+  overflow-y    : auto;
+}
+
+.position-button {
+  text-align : right;
+}
+
+.position-left {
+  text-align : left;
+}
+
+.fa-sz {
+  font-size : 30px;
+  color     : #FFFFFF;
+}
+
+.btn-dark-green-color {
+  background-color : #218C74 !important;
+  color            : #FFFFFF !important;
+}
+
+.btn-violet-color {
+  background-color : #574B90 !important;
+  color            : #FFFFFF !important;
+}
+
+.filter.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background : #FFFFFF !important;
+}
+
+.btn-dark-red-color {
+  background-color : #B33939 !important;
+  color            : #FFFFFF !important;
+}
+
+.table-bg {
+  background : #34495E;
+}
+
+.w-450 {
+  width : 450px;
+}
+
+.table-widths-all {
+  display                    : block;
+  width                      : 100%;
+  overflow-x                 : auto;
+  -webkit-overflow-scrolling : touch;
+  -ms-overflow-style         : -ms-autohiding-scrollbar;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding : .67em 0;
+}
+
+
+.mat-form-field-infix:disabled {
+  color : #BDBDBD;
+}
+
+
+.mat-checkbox-layout {
+  white-space : normal !important;
+}
+
+.mb {
+  margin-top : 40px;
+}
+
+.cdk-overlay-container {
+  z-index : 1200 !important;
+}
+
+.md-form input[type=text], .md-form input[type=password], .md-form input[type=email], .md-form input[type=url], .md-form input[type=time], .md-form input[type=date], .md-form input[type=datetime-local], .md-form input[type=tel], .md-form input[type=number], .md-form input[type=search-md], .md-form input[type=search], .md-form textarea.md-textarea {
+  border-bottom : 1px solid rgba(0, 0, 0, .4);
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color : #757575;
+}
+
+.btn-circle {
+  width         : 30px;
+  height        : 30px;
+  padding       : 6px 0px;
+  border-radius : 15px;
+  text-align    : center;
+  font-size     : 12px;
+  line-height   : 1.42857;
+}
+
+.drop-zone {
+  webkit-box-shadow : 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15) !important;
+  box-shadow        : 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15) !important;
+  border            : 1px solid rgba(0, 0, 0, .4) !important;
+}
+
+.body-loader {
+  position   : absolute;
+  top        : 50%;
+  left       : 50%;
+  transform  : translate(-50%, -50%);
+  z-index    : 9999;
+  width      : 100%;
+  height     : 100vh;
+  background : rgba(255, 255, 255, 0.35);
+}
+
+.loader {
+  position  : absolute;
+  top       : 50%;
+  left      : 50%;
+  transform : translate(-50%, -50%);
+  margin    : 0 auto;
+  width     : 250px;
+}
+
+.loader:before {
+  content     : '';
+  display     : block;
+  padding-top : 100%;
+}
+
+.circular {
+  animation        : rotate 2s linear infinite;
+  height           : 100%;
+  transform-origin : center center;
+  width            : 100%;
+  position         : absolute;
+  top              : 0;
+  bottom           : 0;
+  left             : 0;
+  right            : 0;
+  margin           : auto;
+}
+
+.path {
+  stroke-dasharray  : 1, 200;
+  stroke-dashoffset : 0;
+  animation         : dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap    : round;
+}
+
+.doc-checkbox .mat-checkbox-label {
+  margin-left : 15px !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color : #F44336;
+  border           : 1px solid #F44336;
+}
+
+
+.btn-rounded-button {
+  border-radius : 15px !important;
+}
+
+.md-form-selected-modified {
+  position      : relative;
+  margin-top    : 0px !important;
+  margin-bottom : 2px !important;
+}
+
+@keyframes rotate {
+  100% {
+    transform : rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray  : 1, 200;
+    stroke-dashoffset : 0;
+  }
+  50% {
+    stroke-dasharray  : 89, 200;
+    stroke-dashoffset : -35px;
+  }
+  100% {
+    stroke-dasharray  : 89, 200;
+    stroke-dashoffset : -124px;
+  }
+}
+
+@keyframes color {
+  100%, 0% {
+    stroke : #4285F5;
+  }
+  40% {
+    stroke : #EA4436;
+  }
+  66% {
+    stroke : #FBBD06;
+  }
+  80%, 90% {
+    stroke : #34A952;
+  }
+}
+
+@-webkit-keyframes fade-out {
+  from {
+    opacity : 1
+  }
+  to {
+    opacity : 0
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity : 1
+  }
+  to {
+    opacity : 0
+  }
+}
+
+@media screen and (min-width : 1439px) and (max-width : 1441px) {
+  .col-xxl-10 {
+    -ms-flex  : 0 0 75%;
+    flex      : 0 0 75%;
+    max-width : 75%;
+  }
+
+  .offset-xxl-2 {
+    margin-left : 25%;
+  }
+
+  .offset-xxl-1 {
+    margin-left : 4%
+  }
+
+  .col-xxl-11 {
+    flex         : 0 0 96%;
+    max-width    : 96%;
+    margin-right : 10px;
+  }
+}
+
+
+@media screen and (min-width : 1442px) {
+  .col-xxl-10 {
+    -ms-flex  : 0 0 83.333333%;
+    flex      : 0 0 83.333333%;
+    max-width : 83.333333%;
+  }
+
+  .offset-xxl-2 {
+    margin-left : 16.666667%;
+  }
+
+  .offset-xxl-1 {
+    margin-left : 3%
+  }
+
+  .col-xxl-11 {
+    flex         : 0 0 97%;
+    max-width    : 97%;
+    margin-right : 10px;
+  }
+}
+
+@media screen and (min-width : 200px) and (max-width : 1438px) {
+  .offset-xl-1 {
+    margin-left : 4.333333%;
+  }
+
+  .col-xl-11 {
+    flex      : 0 0 95.666667%;
+    max-width : 95.666667%;
+  }
+}
+
+@media only screen and (max-width : 1025px) {
+
+  .table-widths {
+    display                    : block;
+    width                      : 100%;
+    overflow-x                 : auto;
+    -webkit-overflow-scrolling : touch;
+    -ms-overflow-style         : -ms-autohiding-scrollbar;
+  }
+
+}
+
+@media only screen and (max-width : 769px) {
+  .table-widths-lg {
+    display                    : block;
+    width                      : 100%;
+    overflow-x                 : auto;
+    -webkit-overflow-scrolling : touch;
+    -ms-overflow-style         : -ms-autohiding-scrollbar;
+  }
+
+  .w-70 {
+    width : 100%;
+  }
+
+  .position-button {
+    text-align : center;
+  }
+
+  .position-left {
+    text-align : center;
+  }
+
+  .w-70 {
+    width : 70%;
+  }
+
+  .btn-md-bl {
+    display    : block;
+    margin     : 0 auto;
+    margin-top : 10px;
+  }
+}
+
+@media only screen and (max-width : 425px) {
+  .btn-sm-bl {
+    display : block;
+    margin  : 10px auto 0;
+  }
+
+  .login-content {
+    margin-top : 80px;
+  }
+}
+
+
+@media only screen and (max-width : 374px) {
+  .btn-sm-bl {
+    width : 100%;
+  }
+
+  .login {
+    margin-top : 80px;
+    width      : 100%;
+  }
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color : #F44336;
+  border           : 1px solid #F44336;
+}
+
+.btn-rounded-button {
+  border-radius : 15px !important;
+}
+
+.btn {
+  text-transform : none !important;
+}
+
+.btn.btn-sm {
+  font-size : 0.80rem;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  overflow : visible;
+}
+
+.md-form label {
+  white-space   : nowrap;
+  width         : 100%;
+  overflow      : hidden;
+  text-overflow : ellipsis;
+  display       : inline-block;
+}

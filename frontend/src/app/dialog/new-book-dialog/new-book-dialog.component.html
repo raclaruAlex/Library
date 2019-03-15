@@ -1,0 +1,79 @@
+<div>
+  <form [formGroup]='mForm'>
+    <h3 class="text-center my-3 font-weight-bold">{{titlePage}}</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="title" mdbInputDirective type="text" formControlName="title" class="form-control">
+          <label for="title">Titlu</label>
+          <div *ngIf="formSubmitted && mForm.get('title').invalid">
+            <small class="text-muted"><strong class="text-danger">Titlul trebuie introdus</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="author" mdbInputDirective type="text" formControlName="author" class="form-control">
+          <label for="author">Autor</label>
+          <div *ngIf="formSubmitted && mForm.get('author').invalid">
+            <small class="text-muted"><strong class="text-danger">Autorul trebuie introdus</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form-modified">
+          <ng-select id="categories" name="categories" [items]="categories" bindLabel="description"
+                     placeholder="Categorie" formControlName="category">
+          </ng-select>
+          <div *ngIf="formSubmitted && mForm.get('category').invalid">
+            <small class="text-muted"><strong class="text-danger">Categoria trebuie selectata</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="publisher" mdbInputDirective type="text" formControlName="publisher" class="form-control">
+          <label for="publisher">Editura</label>
+          <div *ngIf="formSubmitted && mForm.get('publisher').invalid">
+            <small class="text-muted"><strong class="text-danger">Editura trebuie introdusa</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="publicationYear" mdbInputDirective type="number" min="1900" max="2019" step="1" formControlName="publicationYear" class="form-control">
+          <label for="publicationYear">Anul editiei</label>
+          <div *ngIf="formSubmitted && mForm.get('publicationYear').hasError('required')">
+            <small class="text-muted"><strong class="text-danger">Anul editiei trebuie introdus</strong></small>
+          </div>
+          <div *ngIf="formSubmitted && (mForm.get('publicationYear').hasError('min') || mForm.get('publicationYear').hasError('max'))">
+            <small class="text-muted"><strong class="text-danger">Anul editiei este invalid</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" formGroupName="quantity">
+        <div class="md-form">
+          <input id="totalQuantity" mdbInputDirective type="number" min="1" step="1" formControlName="totalQuantity" class="form-control">
+          <label for="totalQuantity">Cantitate</label>
+          <div *ngIf="formSubmitted && mForm.get('quantity.totalQuantity').hasError('required')">
+            <small class="text-muted"><strong class="text-danger">Cantitatea trebuie introdusa</strong></small>
+          </div>
+          <div *ngIf="formSubmitted && mForm.get('quantity.totalQuantity').hasError('min')">
+            <small class="text-muted"><strong class="text-danger">Cantitatea introdusa nu este valida</strong></small>
+          </div>
+          <div *ngIf="formSubmitted && this.mForm.get('quantity.totalQuantity').value<this.mForm.get('quantity.rentalQuantity').value">
+            <small class="text-muted"><strong class="text-danger">Cantitatea introdusa este mai mica decit numarul cartilor inchiriate</strong></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="text-center">
+  <div mat-dialog-actions>
+    <div class="w-100">
+      <button class="btn btn-danger btn-sm waves-light" (click)="cancel()">Anulare</button>
+      <button class="btn btn-dark-green-color btn-sm waves-light" (click)="add()">Adaugare</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.md-form {
+  position: relative;
+  margin-top: 14px !important;
+  margin-bottom: 5px !important;
+}
+
+.md-form-modified {
+  position: relative;
+  margin-top: 0px;
+  margin-bottom: 5px !important;
+}
+
+.mat-radio-button.mat-radio-disabled .mat-radio-label-content {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.mt-4s {
+  padding-top: 45px;
+}

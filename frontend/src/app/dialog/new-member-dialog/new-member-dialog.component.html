@@ -1,0 +1,63 @@
+<div>
+  <form [formGroup]='mForm'>
+    <h3 class="text-center my-3 font-weight-bold">Adaugare membru</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="lastname" mdbInputDirective type="text" formControlName="lastname" class="form-control">
+          <label for="lastname">Nume</label>
+          <div *ngIf="formSubmitted && mForm.get('lastname').invalid">
+            <small class="text-muted"><strong class="text-danger">Numele trebuie introdus</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="firstname" mdbInputDirective type="text" formControlName="firstname" class="form-control">
+          <label for="firstname">Prenume</label>
+          <div *ngIf="formSubmitted && mForm.get('firstname').invalid">
+            <small class="text-muted"><strong class="text-danger">Prenumele trebuie introdus</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="address" mdbInputDirective type="text" formControlName="address" class="form-control">
+          <label for="address">Adresa</label>
+          <div *ngIf="formSubmitted && mForm.get('address').invalid">
+            <small class="text-muted"><strong class="text-danger">Adresa trebuie introdusa</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="phoneNumber" mdbInputDirective type="text" formControlName="phoneNumber" class="form-control">
+          <label for="phoneNumber">Numar de telefon</label>
+          <div *ngIf="formSubmitted && mForm.get('phoneNumber').invalid">
+            <small class="text-muted"><strong class="text-danger">Numarul de telefon trebuie introdus</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="md-form">
+          <input id="email" mdbInputDirective type="text" formControlName="email" class="form-control">
+          <label for="email">Email</label>
+          <div *ngIf="formSubmitted && mForm.get('email').hasError('required')">
+            <small class="text-muted"><strong class="text-danger">Email-ul trebuie introdus</strong></small>
+          </div>
+          <div *ngIf="formSubmitted && mForm.get('email').hasError('email')">
+            <small class="text-muted"><strong class="text-danger">Email-ul este invalid</strong></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="text-center">
+  <div mat-dialog-actions>
+    <div class="w-100">
+      <button class="btn btn-danger btn-sm waves-light" (click)="cancel()">Anulare</button>
+      <button class="btn btn-dark-green-color btn-sm waves-light" (click)="add()">Adaugare</button>
+    </div>
+  </div>
+</div>

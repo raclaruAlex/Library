@@ -1,0 +1,125 @@
+<div class="container-fluid sky z-depth-2">
+  <div class="row">
+    <div class="col-4">
+      <div class="widget widget-stats bg-gradient-blue">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-book fa-fw"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">Numarul total de carti</div>
+          <div class="stats-number">{{totalQuantity}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="widget widget-stats bg-gradient-green">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-book fa-fw"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">Numarul cartilor disponibile</div>
+          <div class="stats-number">{{totalQuantity-rentalQuantity}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="widget widget-stats bg-gradient-red">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-users fa-fw"></i></div>
+        <div class="stats-content" (click)="showMembers(1)">
+          <div class="stats-title">Numarul membrilor</div>
+          <div class="stats-number">{{members.length}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right" *ngIf=visibility>
+    <mat-form-field class="w-25">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtru" class="w-25">
+    </mat-form-field>
+  </div>
+  <div class="gradient-card-header bg-sidebar border-gradient">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="card-header-title white-text">Lista cartilor</div>
+        </div>
+        <div class="col-6">
+          <div class="text-right fap white-text">
+            <i (click)="addBooks()" data-toggle="tooltip" title="Adauga carte" class="fa fa-plus-circle fa-lg fa-mt" aria-hidden="true"></i>
+            <i class="fa fa-lg fa-mt" data-toggle="tooltip" title="Filtru" aria-hidden="true" (click)="changeVisibility();"
+               [ngClass]="visibility ? 'fa-untouched fa-search-minus' : 'fa-touched fa-search-plus' "></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-width">
+    <div class="example-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> #</th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Titlu</th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Autor</th>
+          <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="publisher">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Editura</th>
+          <td mat-cell *matCellDef="let element"> {{element.publisher}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="publicationYear">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Anul editiei</th>
+          <td mat-cell *matCellDef="let element"> {{element.publicationYear}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Categorie</th>
+          <td mat-cell *matCellDef="let element"> {{element.category.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="available">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Disponibile</th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity.totalQuantity-element.quantity.rentalQuantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rented">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Inchiriate</th>
+          <td mat-cell *matCellDef="let element">
+            <a title="Detalii carti inchiriate" (click)="showRentBooksDetails(element)" *ngIf="element.quantity.rentalQuantity>0">{{element.quantity.rentalQuantity }}</a>
+            <span *ngIf="element.quantity.rentalQuantity==0">
+              {{element.quantity.rentalQuantity}}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-sidebar white-text"> Actiuni</th>
+          <td mat-cell *matCellDef="let element">
+            <button type="button" class="btn btn-mdb-color btn-sm waves-light"
+                    (click)="editBook(element)" data-toggle="tooltip" title="Editare carte" mdbWavesEffect><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+            </button>
+            <button [disabled]="element.quantity.totalQuantity-element.quantity.rentalQuantity<=0" type="button" class="btn btn-dark-red-color waves-light btn-sm waves-light"
+                    (click)="rent(element.id)" data-toggle="tooltip" title="Imprumut carte" mdbWavesEffect><i class="fa fa-leanpub fa-lg" aria-hidden="true"></i>
+            </button>
+            <button [disabled]="element.quantity.rentalQuantity<=0" type="button" class="btn btn-mdb-color waves-light btn-sm waves-light"
+                    (click)="return(element.id)" data-toggle="tooltip" title="Returnare carte" mdbWavesEffect><i class="fa fa-mail-forward fa-lg" aria-hidden="true"></i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
+

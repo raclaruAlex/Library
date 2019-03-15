@@ -1,0 +1,46 @@
+<div class="gradient-card-header bg-sidebar border-gradient">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="card-header-title white-text">Lista membri</div>
+      </div>
+      <div class="col-6">
+        <div class="text-right fap white-text">
+          <i (click)="addMember()" data-toggle="tooltip" title="Adauga membru" class="fa fa-plus-circle fa-lg fa-mt" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card content -->
+<div class="card-body card-body-cascade">
+  <table class="table table-widths text-center">
+    <thead class="bg-sidebar white-text">
+    <tr>
+      <th scope="col">Nr.</th>
+      <th scope="col">Nume</th>
+      <th scope="col">Prenume</th>
+      <th scope="col">Adresa</th>
+      <th scope="col">Numar de telefon</th>
+      <th scope="col">Email</th>
+      <th scope="col">Actiuni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let member of members;let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ member.lastname }}</td>
+      <td>{{ member.firstname }}</td>
+      <td>{{ member.address }}</td>
+      <td>{{ member.phoneNumber }}</td>
+      <td>{{ member.email }}</td>
+      <td>
+        <button type="button" class="btn btn-mdb-color btn-sm waves-light"
+                (click)="editMember(member,i)" data-toggle="tooltip" title="Editare membru" mdbWavesEffect><i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

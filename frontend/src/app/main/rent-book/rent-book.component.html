@@ -1,0 +1,137 @@
+<div class="container-fluid sky z-depth-2">
+  <h2 mat-dialog-title class="text-center alert alert-success">Inchiriere carte</h2>
+  <form [formGroup]="rbForm">
+    <h4 class="text-center my-3 font-weight-bold">Detalii carte</h4>
+    <div class="row">
+      <div class="col">
+        <div class="md-form">
+          <input id="title" mdbInputDirective type="text" class="form-control" formControlName="title" [attr.disabled]="true">
+          <label for="title" class="top: -15px;">Titlu</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="author" mdbInputDirective type="text" class="form-control" formControlName="author" [attr.disabled]="true">
+          <label for="author">Autor</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="publisher" mdbInputDirective type="text" class="form-control" formControlName="publisher" [attr.disabled]="true">
+          <label for="publisher">Editura</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="publicationYear" mdbInputDirective type="text" class="form-control" formControlName="publicationYear" [attr.disabled]="true">
+          <label for="publicationYear">Anul editiei</label>
+        </div>
+      </div>
+      <div class="col" formGroupName="category">
+        <div class="md-form">
+          <input id="category" mdbInputDirective type="text" class="form-control" formControlName="description" [attr.disabled]="true">
+          <label for="category">Categorie</label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form [formGroup]="membForm">
+    <h4 class="text-center my-3 font-weight-bold">Detalii membru</h4>
+    <div class="row">
+      <div class="col-md">
+        <div class="md-form-modified">
+          <ng-select class="custom" [items]="members | async"
+                     bindLabel="lastname"
+                     placeholder="Nume "
+                     formControlName="member"
+                     [required]="true"
+                     [typeahead]="memberInput"
+                     [loading]="mmemberLoading">
+            <ng-template ng-option-tmp let-item="item">
+              {{item.lastname + ' ' + item.firstname}} <br/>
+              <small>{{item.address}}</small>
+            </ng-template>
+          </ng-select>
+          <div *ngIf="formSubmitted && (!membForm.get('member').value || !membForm.get('member').value.id)">
+            <small class="text-muted"><strong class="text-danger">Membrul trebuie selectat</strong></small>
+          </div>
+          <div *ngIf="bookAlreadyRented">
+            <small class="text-muted"><strong class="text-danger">Membrul detine deja aceasta carte</strong></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="md-form">
+          <button class="btn btn-mdb-color btn-sm" mdbTooltip="Membru nou" (click)="newMember()"><i
+            class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="firstname" mdbInputDirective type="text" class="form-control" [value]="membForm.get('member').value?.firstname" [attr.disabled]="true">
+          <label for="firstname">Prenume</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="address" mdbInputDirective type="text" class="form-control" [value]="membForm.get('member').value?.address" [attr.disabled]="true">
+          <label for="address">Adresa</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="phoneNumber" mdbInputDirective type="text" class="form-control" [value]="membForm.get('member').value?.phoneNumber" [attr.disabled]="true">
+          <label for="phoneNumber">Numar de telefon</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="md-form">
+          <input id="email" mdbInputDirective type="text" class="form-control" [value]="membForm.get('member').value?.email" [attr.disabled]="true">
+          <label for="email">Email</label>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="gradient-card-header bg-sidebar border-gradient">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <div class="card-header-title white-text">Istorie inchirieri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card content -->
+    <div class="card-body card-body-cascade">
+      <table class="table table-widths text-center">
+        <thead class="bg-sidebar white-text">
+        <tr>
+          <th scope="col">Nr.</th>
+          <th scope="col">Titlu</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Data inchiriere</th>
+          <th scope="col">Data returnare</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hist of history;let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ hist.book.title }}</td>
+          <td>{{ hist.book.author }}</td>
+          <td>{{ hist.book.category.description }}</td>
+          <td>{{ hist.rentalDate | date: 'dd/MM/yyyy HH:mm:ss'  }}</td>
+          <td>{{ hist.returnDate | date: 'dd/MM/yyyy HH:mm:ss'  }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!history || history.length === 0" class="text-center text-muted mt-3"> Nu sunt inregistrari gasite!</div>
+    <hr>
+  </form>
+  <div class="text-center">
+    <button class="btn btn-danger waves-light btn-sm btn-sm-bl" mdbWavesEffect (click)="back()">Inapoi</button>
+    <button class="btn btn-mdb-color waves-light btn-sm btn-sm-bl" mdbWavesEffect (click)="rent()">Chirie</button>
+  </div>
+</div>

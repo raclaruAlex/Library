@@ -14,6 +14,9 @@
                 <div *ngIf="formSubmitted && lForm.get('username').invalid">
                   <small class="text-muted"><strong class="text-danger">Utilizatorul trebuie introdus</strong></small>
                 </div>
+                <div *ngIf="error">
+                  <small class="text-muted"><strong class="text-danger">{{error}}</strong></small>
+                </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
